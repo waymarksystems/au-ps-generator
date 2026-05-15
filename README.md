@@ -6,8 +6,26 @@ This project is a plugin for the HAPI FHIR JPA server that implements the [AU Pa
 
 ## Getting Started
 
+### Via Maven:
+The generator is published as a Maven package and can be added to your HAPI-FHIR server as a dependency.
+
+In your pom.xml:
+```
+
+
+```
+
+### Via a JAR
+You can also download the jar and add it to your project build that way: <<<link-to-ghcr-io here>>>
+
 
 ## Configuration
+
+Once installed, enable the generator.
+In your `application.properties`, set:
+```
+hapi.fhir.aups_enabled = true
+```
 
 
 ## Narrative
