@@ -1,5 +1,5 @@
 /*
- * Copyright 2026 Waymark Systems
+ * Copyright 2026 Waymark Systems Pty Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.waymarksystems.fhir.aups;
+package au.waymarksystems.health.fhir.aups;
 
 import org.hl7.fhir.r4.model.AllergyIntolerance;
 import org.hl7.fhir.r4.model.Condition;

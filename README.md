@@ -36,7 +36,7 @@ The generator is published as a Maven package and can be added to your HAPI-FHIR
 In your pom.xml:
 ```xml
 <dependency>
-    <groupId>com.waymarksystems.fhir</groupId>
+    <groupId>au.waymarksystems.health.fhir</groupId>
     <artifactId>au-ps-generator</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
