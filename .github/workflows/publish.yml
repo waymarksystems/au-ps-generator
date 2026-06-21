@@ -32,8 +32,9 @@ jobs:
       - name: Set snapshot version for branch builds
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         run: |
+          BASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          mvn --no-transfer-progress versions:set -DnewVersion="$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')-${SHORT_SHA}-SNAPSHOT" -DgenerateBackupPoms=false
+          mvn --no-transfer-progress versions:set -DnewVersion="${BASE_VERSION}-${SHORT_SHA}-SNAPSHOT" -DgenerateBackupPoms=false
 
       - name: Set release version from tag
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
