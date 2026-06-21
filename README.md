@@ -43,7 +43,7 @@ GitHub Packages requires authentication. Add your credentials to `~/.m2/settings
 
 ```xml
 <dependency>
-  <groupId>au.gov.health.fhir</groupId>
+  <groupId>au.waymarksystems.health.fhir</groupId>
   <artifactId>au-ps-generator</artifactId>
   <version>1.0.0</version>
 </dependency>

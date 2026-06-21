@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>au.gov.health.fhir</groupId>
+    <groupId>au.waymarksystems.health.fhir</groupId>
     <artifactId>au-ps-generator</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -24,7 +24,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hapi.version>7.4.0</hapi.version>
+        <hapi.version>8.10.0</hapi.version>
         <spring.version>6.1.14</spring.version>
         <junit.version>5.10.3</junit.version>
     </properties>

@@ -1,4 +1,4 @@
-package au.gov.health.fhir.aups;
+package au.waymarksystems.health.fhir.aups;
 
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import org.hl7.fhir.r4.model.Bundle;

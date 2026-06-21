@@ -1,4 +1,4 @@
-package au.gov.health.fhir.aups;
+package au.waymarksystems.health.fhir.aups;
 
 import ca.uhn.fhir.jpa.ips.provider.IpsOperationProvider;
 import ca.uhn.fhir.rest.annotation.IdParam;
