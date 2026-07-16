@@ -21,7 +21,6 @@ import static org.mockito.Mockito.mock;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.jpa.ips.api.IIpsGenerationStrategy;
 import ca.uhn.fhir.jpa.ips.generator.IIpsGeneratorSvc;
-import ca.uhn.fhir.jpa.ips.provider.IpsOperationProvider;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
@@ -39,7 +38,8 @@ class AuPsConfigTest {
 		myRunner.run(context -> {
 			assertThat(context).doesNotHaveBean(IIpsGenerationStrategy.class);
 			assertThat(context).doesNotHaveBean(IIpsGeneratorSvc.class);
-			assertThat(context).doesNotHaveBean(IpsOperationProvider.class);
+			assertThat(context).doesNotHaveBean(AuPatientSummaryGeneratorSvc.class);
+			assertThat(context).doesNotHaveBean(AuPatientSummaryGeneratorProvider.class);
 		});
 	}
 
@@ -56,7 +56,8 @@ class AuPsConfigTest {
 			assertThat(context).hasSingleBean(IIpsGenerationStrategy.class);
 			assertThat(context.getBean(IIpsGenerationStrategy.class)).isInstanceOf(AuPsGenerationStrategy.class);
 			assertThat(context).hasSingleBean(IIpsGeneratorSvc.class);
-			assertThat(context).hasSingleBean(IpsOperationProvider.class);
+			assertThat(context).hasSingleBean(AuPatientSummaryGeneratorSvc.class);
+			assertThat(context).hasSingleBean(AuPatientSummaryGeneratorProvider.class);
 		});
 	}
 

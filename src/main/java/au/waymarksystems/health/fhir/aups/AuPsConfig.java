@@ -19,7 +19,7 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.jpa.ips.api.IIpsGenerationStrategy;
 import ca.uhn.fhir.jpa.ips.generator.IIpsGeneratorSvc;
 import ca.uhn.fhir.jpa.ips.generator.IpsGeneratorSvcImpl;
-import ca.uhn.fhir.jpa.ips.provider.IpsOperationProvider;
+import org.hl7.fhir.r4.model.Bundle;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -60,8 +60,19 @@ public class AuPsConfig {
 	}
 
 	@Bean
-	@ConditionalOnMissingBean(IpsOperationProvider.class)
-	public IpsOperationProvider auPsOperationProvider(IIpsGeneratorSvc theIpsGeneratorSvc) {
-		return new IpsOperationProvider(theIpsGeneratorSvc);
+	@ConditionalOnMissingBean(AuPatientSummaryGeneratorSvc.class)
+	public AuPatientSummaryGeneratorSvc auPatientSummaryGeneratorSvc(IIpsGeneratorSvc theIpsGeneratorSvc) {
+		return (thePatientId, theProfile, theRequestDetails) -> (Bundle) theIpsGeneratorSvc.generateIps(
+				theRequestDetails,
+				thePatientId,
+				theProfile != null ? theProfile.getValueAsString() : null);
+	}
+
+	@Bean
+	@ConditionalOnMissingBean(AuPatientSummaryGeneratorProvider.class)
+	public AuPatientSummaryGeneratorProvider auPsOperationProvider(
+			IIpsGeneratorSvc theIpsGeneratorSvc,
+			AuPatientSummaryGeneratorSvc theAuPatientSummaryGeneratorSvc) {
+		return new AuPatientSummaryGeneratorProvider(theIpsGeneratorSvc, theAuPatientSummaryGeneratorSvc);
 	}
 }

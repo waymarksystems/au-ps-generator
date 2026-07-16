@@ -24,19 +24,27 @@
     </licenses>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <hapi-fhir.version>8.2.0</hapi-fhir.version>
+        <hapi-fhir.version>8.10.0</hapi-fhir.version>
         <spring.version>6.2.1</spring.version>
         <spring-boot.version>3.4.1</spring-boot.version>
 
-        <junit.version>5.11.4</junit.version>
+        <junit.version>5.10.3</junit.version>
         <mockito.version>5.14.2</mockito.version>
         <assertj.version>3.27.0</assertj.version>
     </properties>
 
     <dependencies>
+        <!-- HAPI FHIR JPA Server -->
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-jpaserver-base</artifactId>
+            <version>${hapi-fhir.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!--
           The HAPI FHIR IPS module provides the International Patient Summary generation
           framework that this plugin extends. It is supplied by the host HAPI FHIR server
@@ -72,7 +80,13 @@
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
@@ -114,6 +128,27 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.2</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/waymarksystems/au-ps-generator</url>
+        </repository>
+    </distributionManagement>
 </project>
