@@ -1,0 +1,28 @@
+<!--/* Patient Story (AU PS) */-->
+<div xmlns:th="http://www.thymeleaf.org">
+   <h5>Patient Story</h5>
+   <table class="hapiPropertyTable">
+      <thead>
+      <tr>
+         <th>Type</th>
+         <th>Description</th>
+         <th>Date</th>
+         <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <th:block th:each="entry : ${resource.entry}" th:object="${entry.getResource()}">
+         <th:block th:unless='*{getResourceType().name() == "Composition"}'>
+            <th:block th:with="extension=${entry.getResource().getExtensionByUrl('http://hl7.org/fhir/StructureDefinition/narrativeLink')}">
+               <tr th:id="${extension != null} ? ${#strings.arraySplit(extension.getValue().getValue(), '#')[1]} : ''">
+                  <td th:insert="~{IpsUtilityFragments :: codeableConcept (cc=*{getType()},attr='display')}">Type</td>
+                  <td th:text="*{hasDescription() ? getDescription() : ''}">Description</td>
+                  <td th:insert="~{IpsUtilityFragments :: renderTime (time=*{getDateElement()})}">Date</td>
+                  <td th:text="*{getStatus()}">Status</td>
+               </tr>
+            </th:block>
+         </th:block>
+      </th:block>
+      </tbody>
+   </table>
+</div>

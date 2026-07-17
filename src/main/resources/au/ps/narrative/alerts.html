@@ -1,0 +1,28 @@
+<!--/* Alerts (AU PS) */-->
+<div xmlns:th="http://www.thymeleaf.org">
+   <h5>Alerts</h5>
+   <table class="hapiPropertyTable">
+      <thead>
+      <tr>
+         <th>Status</th>
+         <th>Category</th>
+         <th>Code</th>
+         <th>Period</th>
+      </tr>
+      </thead>
+      <tbody>
+      <th:block th:each="entry : ${resource.entry}" th:object="${entry.getResource()}">
+         <th:block th:unless='*{getResourceType().name() == "Composition"}'>
+            <th:block th:with="extension=${entry.getResource().getExtensionByUrl('http://hl7.org/fhir/StructureDefinition/narrativeLink')}">
+               <tr th:id="${extension != null} ? ${#strings.arraySplit(extension.getValue().getValue(), '#')[1]} : ''">
+                  <td th:text="*{getStatus()}">Status</td>
+                  <td th:insert="~{IpsUtilityFragments :: concat (list=*{getCategory()},attr='text')}">Category</td>
+                  <td th:insert="~{IpsUtilityFragments :: codeableConcept (cc=*{getCode()},attr='display')}">Code</td>
+                  <td th:insert="~{IpsUtilityFragments :: renderTime (time=*{getPeriod()})}">Period</td>
+               </tr>
+            </th:block>
+         </th:block>
+      </th:block>
+      </tbody>
+   </table>
+</div>
